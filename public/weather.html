@@ -1,0 +1,106 @@
+<html >
+
+<script src="ang.js">
+
+</script>
+<style >
+	div
+	{ }
+	marquee,a,h2,h3{
+		color: white;
+	}
+</style>
+<body background="image\s1.jpg">
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '101112303793219',
+      xfbml      : true,
+      version    : 'v2.9'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div ng-app="myApp" ng-controller="myctrl" ng-model="pnrstatus">
+<marquee >
+<img src="image\p.png">
+<h1> CURRENT WEATHER  STATUS </h1>
+</marquee>
+
+
+
+</br>
+
+<br>
+<div style=" padding-left: 40%">
+
+<h2>ENTER THE CITY NAME</h2>
+<input type="text" ng-model="trainnumber">
+
+{{trainnumber}}
+<button ng-click='sayHello()'>weather</button>
+
+<br>
+<h3>TEMP     -	{{mywelcome.main.temp-273}} 'c</h3>
+
+<h3>MINIMUM TEMP     -  {{mywelcome.main.temp_min-273}} 'c</h3>
+
+
+<h3>MAXIMUM TEMP     -  {{mywelcome.main.temp_max-273}} 'c</h3>
+
+
+<h3>WIND SPEED     -  {{mywelcome.wind.speed}} KM/H</h3>
+
+
+<h3>DESCRIPTION    -  {{mywelcome.weather.main}}.</h3>
+
+</div>
+
+<marquee>
+<h1> Creater of the website is </h1>
+
+</marquee>
+<img src="image\rishab.jpg ">
+
+</div>
+
+
+<script>
+
+var app=angular.module('myApp',[]);
+app.controller('myctrl',function ($scope,$http,$log) {
+$scope.trainnumber='delhi';		
+ $scope.sayHello = function() {
+    $scope.greeting = $scope.trainnumber ;
+$http({
+
+method:'GET',
+
+url:' http://api.openweathermap.org/data/2.5/weather?q='+$scope.greeting+'&APPID=27987d635a388eecf901a45c75c56a19'})
+.then(function(response)
+{
+$scope.mywelcome=response.data;
+});
+
+};
+
+
+
+});
+
+</script>
+
+</body>
+
+
+</html>
